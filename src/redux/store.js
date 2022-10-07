@@ -1,6 +1,7 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore } from "@reduxjs/toolkit";
 
-import playerReducer from './features/playerSlice';
+// This is the for the music player
+import playerReducer from "./features/playerSlice";
 
 export const store = configureStore({
   reducer: {
