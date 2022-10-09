@@ -1,9 +1,14 @@
+import { useDispatch, useSelector } from "react-redux";
+
 import { genres } from "../assets/constants";
 import { Error, Loader, SongCard } from "../components";
 
 import { useGetTopChartsQuery } from "../redux/services/shazamCore";
 
 const Discover = () => {
+  const dispatch = useDispatch();
+  const { activeSong, isPlaying } = useSelector((state) => state.player);
+
   // built in func we get with redux --> 'data, isFetching, error'
   // coz of redux setup, the data is binded to the api content
   const { data, isFetching, error } = useGetTopChartsQuery();
@@ -43,7 +48,14 @@ const Discover = () => {
       <div className="flex flex-wrap sm:justify-start justify-center gap-8">
         {/* Map over songs fetched from api according to select above */}
         {data?.map((song, i) => (
-          <SongCard key={song.key} song={song} i={i} />
+          <SongCard
+            key={song.key}
+            song={song}
+            i={i}
+            isPlaying={isPlaying}
+            activeSong={activeSong}
+            data={data}
+          />
         ))}
       </div>
     </div>
